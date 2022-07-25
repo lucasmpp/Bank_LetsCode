@@ -7,3 +7,31 @@ Crie as funcionalidades: abrir conta, sacar, depositar, transferência, investir
 Use a classe "Aplicacao" para criar seu método "main" e demonstrar o funcionamento do seu código.
 
 O projeto pode ser entregue via arquivo zip diretamente no Class ou via link de repositório Github, também no Class.
+
+ - Pessoa Física
+
+ - Pessoa Juridica
+
+ - Produtos:
+
+     - Conta-Corrente
+
+     - Conta Poupança
+
+     - Conta Investimento
+
+ - Funcionalidades:
+
+     - Abrir Conta
+
+     - Abrir conta,
+
+     - Sacar,
+
+     - Depositar,
+
+     - Transferência,
+
+     - Investir,
+
+     - Consultar saldo
