@@ -8,17 +8,17 @@ Use a classe "Aplicacao" para criar seu método "main" e demonstrar o funcioname
 
 O projeto pode ser entregue via arquivo zip diretamente no Class ou via link de repositório Github, também no Class.
 
- - Pessoa Física
+ - Pessoa Física 
 
- - Pessoa Juridica
+ - Pessoa Juridica (Pagam taxa de 0,5% para saque ou transferência)
 
  - Produtos:
 
      - Conta-Corrente
 
-     - Conta Poupança
+     - Conta Poupança (Apenas para PF)
 
-     - Conta Investimento
+     - Conta Investimento (Para PJ, rendem 2% a mais)
 
  - Funcionalidades:
 
@@ -35,3 +35,5 @@ O projeto pode ser entregue via arquivo zip diretamente no Class ou via link de 
      - Investir,
 
      - Consultar saldo
+
+

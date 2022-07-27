@@ -1,4 +1,6 @@
-public class PessoaJuridica implements Cliente {
+
+public class PessoaJuridica extends Cliente {
+    Cliente cnpj;
 
     @Override
     public void sacar() {
@@ -13,9 +15,12 @@ public class PessoaJuridica implements Cliente {
     }
 
     @Override
-    public void investir() {
+    public void investir(double taxaInvestimento) {
+
         // TODO Auto-generated method stub
         
     }
+
+
     
 }
