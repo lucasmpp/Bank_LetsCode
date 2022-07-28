@@ -1,22 +1,31 @@
+package src.main.model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Conta {
-    private static List<Conta> contas = new ArrayList<>();
-    private long id;
+    public static List<Conta> contas = new ArrayList<>();
+
     private int agencia;
     private int codigoConta;
     private Cliente cliente;
     private BigDecimal saldo;
     private boolean estadoConta;
 
-    public Conta(){}
+    public Conta() {
+    }
 
     public Conta(int agencia, int codigoConta, Cliente cliente) {
+        this.saldo = BigDecimal.valueOf(0);
+        this.estadoConta = false;
+
         this.agencia = agencia;
         this.codigoConta = codigoConta;
         this.cliente = cliente;
+    }
+    public Conta(int agencia, int codigoConta) {
+        this.agencia = agencia;
+        this.codigoConta = codigoConta;
     }
     
     public int getAgencia() {
@@ -59,20 +68,17 @@ public abstract class Conta {
         this.estadoConta = estadoConta;
     }
 
-    public Conta depositar(){
-        return this;
-    };
     public BigDecimal consultarSaldo(){
         return this.saldo;
     };
 
-    public static boolean ativarConta(Conta conta){
-        //OPERAÇÃO BANCO DE DADOS
-        conta.setEstadoConta(true);
-        return conta.isEstadoConta();
+    public  abstract  Conta abrirConta(Conta tipoConta);
+    public abstract Conta sacar(BigDecimal valor);
+    public Conta depositar(BigDecimal valor){
+        setSaldo(getSaldo().add(valor) );
+        return this;
     }
-    public static List<Conta> getContas() {
-        return contas;
-    }
-    public abstract Conta abrirConta(int agencia, int codigoConta, Cliente cliente, long id);
+    public abstract Conta transferencia(Conta contaOrigem, Conta ContaDestino, BigDecimal valor);
+
+    
 }

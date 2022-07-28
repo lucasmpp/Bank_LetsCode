@@ -1,10 +1,12 @@
+package src.main.model;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class  Cliente {
-    List<Conta> conta = new ArrayList<>();
-    String endereco = "";
-    String nome;
+    public List<Conta> conta = new ArrayList<>();
+    public String endereco = "";
+    public String nome;
     
     public List<Conta> getConta() {
         return conta;
@@ -30,9 +32,6 @@ public abstract class  Cliente {
         this.nome = nome;
     }
 
-    public abstract void sacar();
-    
-    public abstract void transferencia();
-    public abstract void investir(double taxaInvestimento);
+    public abstract BigDecimal getTaxaConta();
 
 }
