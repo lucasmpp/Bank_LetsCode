@@ -1,5 +1,6 @@
 package src.main;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,7 +19,6 @@ public class Aplicacao{
         
         ClientePessoaFisica cliente1 = new ClientePessoaFisica("12345678910","Jose","bairro desconhecido, casa desconhecida");
         ContaCorrente conta1 = new ContaCorrente(29548,462780,cliente1);
-        // ContaInvestimento conta1invest = new ContaInvestimento(29548,462780,cliente1);
 
         ClientePessoaFisica cliente2 = new ClientePessoaFisica("12345678","Maria","bairro conhecido, outra casa");
         ContaCorrente conta2 = new ContaCorrente(29148,462280,cliente2);
@@ -29,14 +29,23 @@ public class Aplicacao{
         ClientePessoaJuridica cliente4 = new ClientePessoaJuridica("0000000333","Ana","Rua da esperança");
         ContaPoupanca conta4 = new ContaPoupanca(29149,461280,cliente4);
 
-        //DEPOSITAR
-        aplicacao
-        .abrirConta(conta1);
+        ClientePessoaFisica cliente5 = new ClientePessoaFisica("12345678","Maria","bairro conhecido, outra casa");
+        ContaInvestimento conta5 = new ContaInvestimento(29150,492280,cliente3);
+        
+        
+        // ABRIR CONTA QUE PRECISA DE LOGIN
+        aplicacao.abrirConta(conta1);
+
+
+        // TESTE DE DEPOSITAR E SACAR DEPOIS DE ABERTA A CONTA
 
         // aplicacao
         // .abrirConta(conta2)
         // .depositar(100)
         // .sacar(30); //ESPERADO 70
+
+
+        // TESTE ABRIR CONTA, DEPOSITAR E TRANSFERENCIA
 
         aplicacao
         .abrirConta(conta3)
@@ -44,11 +53,21 @@ public class Aplicacao{
 
         aplicacao.realizarTransferencia(conta3.fazerLogin(), conta1.fazerLogin(), 30); //ESPERADO 69.85 
 
-        // aplicacao
-        // .abrirConta(conta3)
-        // .depositar(100);
+        // TESTE INVESTIR, CONSULTAR SALDO
         
         // aplicacao.investir((ContaInvestimento)conta3.fazerLogin(), 50, LocalDate.of(2020, 4, 10), LocalDate.of(2020, 4, 14));
+        aplicacao.abrirConta(conta5).depositar(200);
+        aplicacao.investir((ContaInvestimento)conta5.fazerLogin(), 50, LocalDate.of(2020, 4, 10), LocalDate.of(2020, 4, 14));
+        System.out.println(aplicacao.ConsultarSaldo(conta5.fazerLogin()));
+
+        // TESTANDO EXCEÇOES
+
+        // TESTANDO SE É POSSIVEL ABRIR CONTA POUPANÇA COM PESSOA JURIDICA
+        //aplicacao.abrirConta(conta4);
+
+        //TESTANDO SACAR CO SALDO SUFICIENTE
+        aplicacao.abrirConta(conta2).depositar(100);
+        aplicacao.realizarSaque(conta2.fazerLogin(), 200);
 
         aplicacao.listarContas();
     }
@@ -56,12 +75,17 @@ public class Aplicacao{
     // public Conta realizarLogin(Conta conta){
     //     return conta.fazerLogin();
     // }
-
-    //TODO: Método consultar saldo
+    
+    public BigDecimal ConsultarSaldoInvestimento(ContaInvestimento conta){
+        return conta.getSaldoInvestimento();
+    }
+    
+    public BigDecimal ConsultarSaldo(Conta conta){
+        return conta.getSaldo();
+    }
 
     public Conta investir(ContaInvestimento conta,double valor, LocalDate dataInicio, LocalDate dataFim){
         return conta.investir(valor, dataInicio, dataFim);
-        
     }
 
     public Conta realizarSaque(Conta conta,double valor){

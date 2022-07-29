@@ -16,6 +16,7 @@ public class BankExceptions extends RuntimeException{
         erros.put("1003", "\n \nImpossível depositar um valor negativo.");
         erros.put("1004", "\n \nNão é possível criar uma nova conta. Código de Conta e código da agência já existente.");
         erros.put("1005", "\n \nPessoa Jurírica não pode ter conta poupança.");
+        erros.put("1006", "\n \nConta inexistente.");
 
 
     }

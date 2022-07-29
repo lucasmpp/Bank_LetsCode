@@ -23,5 +23,5 @@ public class ContaPoupanca extends Conta {
         return conta;
     }
 
-    //TODO: Método toString()
+   
 }

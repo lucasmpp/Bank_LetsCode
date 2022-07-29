@@ -88,20 +88,7 @@ public abstract class Conta {
         return this;
     };
 
-    // public abstract Conta investir(double valor, LocalDate dataInicio, LocalDate dataFim) throws BankExceptions;
-    // public Conta investir(double valor) throws BankExceptions{
-
-
-    //     if(this.getSaldo().compareTo(BigDecimal.valueOf(valor)) == -1 ){
-    //         throw new BankExceptions("1001");
-    //     }
-
-    //     this.setSaldo(this.getSaldo().subtract(BigDecimal.valueOf(valor).multiply(this.getCliente().getTaxaConta())));
-
-    //     this.setSaldo(this.getSaldo().subtract(BigDecimal.valueOf(valor)));
-    //     mergeConta();
-    //     return this;
-    // };
+    
 
     public Conta depositar(double valor) throws BankExceptions{
 
@@ -160,15 +147,13 @@ public abstract class Conta {
         return false;
     }
 
-    public Conta fazerLogin(){
+    public Conta fazerLogin() throws BankExceptions{
         for(Conta contaGravada:contas){
             if(contaGravada.getAgencia() == this.getAgencia() && contaGravada.getCodigoConta() == this.getCodigoConta()){
               return contaGravada;
             }
         }
-        //TODO: criar exceção
-        System.out.println("LANCAR EXCEÇÃO! CONTA INEXISTENTE");
-        return null;
+        throw new BankExceptions("1006");
     }
 
 
@@ -182,11 +167,7 @@ public abstract class Conta {
         return String.format("\n\n{\nTipoConta: %s,\nTipoCliente: %s,\nNome: %s,\nSaldo: %.2f\n}", TipoConta, TipoCliente, Nome, Saldo);
     }
 
-    // System.out.println("TipoConta: "+conta.getClass().getSimpleName());
-            // System.out.println("TipoCliente: "+conta.getCliente().getClass().getSimpleName());
-            // System.out.println("nome: "+conta.getCliente().nome);
-            // System.out.println("saldo: "+conta.getSaldo());
-            // System.out.println();
+
 
     
 }

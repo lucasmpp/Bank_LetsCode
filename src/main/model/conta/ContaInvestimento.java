@@ -28,12 +28,7 @@ public class ContaInvestimento extends Conta  {
         }
         
         this.saldoInvestimento = BigDecimal.valueOf(ChronoUnit.DAYS.between( dataInicio , dataFim )).multiply(getCliente().getTaxaInvestimento()).multiply(BigDecimal.valueOf(valor)).add(BigDecimal.valueOf(valor));
-        // this.saldoInvestimento = BigDecimal.valueOf(valor)
-        //                                     .multiply(getCliente().getTaxaInvestimento())
-        //                                     .pow((int)ChronoUnit.DAYS.between( dataInicio , dataFim ))
-        //                                     .add(BigDecimal.valueOf(valor));
-
-        // this.setSaldo(this.getSaldo().subtract(BigDecimal.valueOf(valor).multiply(this.getCliente().getTaxaConta())));
+        
 
         this.setSaldo(this.getSaldo().subtract(BigDecimal.valueOf(valor)));
         mergeConta();
