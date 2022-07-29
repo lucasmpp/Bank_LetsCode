@@ -28,32 +28,19 @@ public class Aplicacao{
 
         //DEPOSITAR
         aplicacao
-        .abrirConta(conta1)
-        .depositar(300);
+        .abrirConta(conta1);
 
         aplicacao
-        .abrirConta(conta2);
+        .abrirConta(conta2)
+        .depositar(100)
+        .sacar(30); //ESPERADO 70
 
         aplicacao
-        .abrirConta(conta3);
-
-        aplicacao
-        .abrirConta(conta4);
-
-        //OPERACOES PARA CONTAS JA CRIADAS (precisa do fazerLogin())
-        aplicacao.
-        realizarDeposito(conta2.fazerLogin(), 100);
-
-        aplicacao
-        .realizarDeposito(conta1.fazerLogin(), 100);
-        //TRANSFERÊNCIA
-        aplicacao
-        .realizarTransferencia(conta2.fazerLogin(), conta1.fazerLogin(), 200);
-        
-        aplicacao.realizarDeposito(conta4.fazerLogin(), 500);
+        .abrirConta(conta4)
+        .depositar(100);
+        aplicacao.realizarTransferencia(conta4.fazerLogin(), conta1.fazerLogin(), 30); //ESPERADO 69.85 
 
         aplicacao.listarContas();
-
     }
 
     // public Conta realizarLogin(Conta conta){

@@ -74,7 +74,9 @@ public abstract class Conta {
     public  abstract  Conta abrirConta(Conta tipoConta);
 
     public  Conta sacar(double valor){
-        this.setSaldo(this.getSaldo().subtract(BigDecimal.valueOf(valor)).subtract(this.getCliente().getTaxaConta()));
+        this.setSaldo(this.getSaldo().subtract(BigDecimal.valueOf(valor).multiply(this.getCliente().getTaxaConta())));
+
+        this.setSaldo(this.getSaldo().subtract(BigDecimal.valueOf(valor)));
         mergeConta();
         return this;
     };
