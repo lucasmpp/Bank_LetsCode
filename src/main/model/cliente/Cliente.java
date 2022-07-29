@@ -1,13 +1,22 @@
-package src.main.model;
+package src.main.model.cliente;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
+import src.main.model.conta.Conta;
 
 public abstract class  Cliente {
     public List<Conta> conta = new ArrayList<>();
     public String endereco = "";
     public String nome;
     
+    public Cliente(String nome,String endereco){
+        this.nome = nome;
+        this.endereco = endereco;
+    }
+    
+    public Cliente(){};
+
     public List<Conta> getConta() {
         return conta;
     }

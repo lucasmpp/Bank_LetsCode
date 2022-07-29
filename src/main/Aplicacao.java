@@ -1,38 +1,84 @@
 package src.main;
 
-import java.math.BigDecimal;
 import java.util.List;
 
-import src.main.model.Cliente;
-import src.main.model.Conta;
+import src.main.model.cliente.ClientePessoaFisica;
+import src.main.model.cliente.ClientePessoaJuridica;
+import src.main.model.conta.Conta;
+import src.main.model.conta.ContaCorrente;
+import src.main.model.conta.ContaInvestimento;
+import src.main.model.conta.ContaPoupanca;
 
 public class Aplicacao{
+
     public static void main(String[] args) {
         Aplicacao aplicacao = new Aplicacao();
         
-        ClientePessoaFisica cliente1 = new ClientePessoaFisica("12345678910","bairro desconhecido, casa desconhecida","Jose");
+        ClientePessoaFisica cliente1 = new ClientePessoaFisica("12345678910","Jose","bairro desconhecido, casa desconhecida");
         ContaCorrente conta1 = new ContaCorrente(29548,462780,cliente1);
 
-        ClientePessoaFisica cliente2 = new ClientePessoaFisica("12345678","bairro conhecido, outra casa","Maria");
+        ClientePessoaFisica cliente2 = new ClientePessoaFisica("12345678","Maria","bairro conhecido, outra casa");
         ContaCorrente conta2 = new ContaCorrente(29148,462280,cliente2);
 
-        ClientePessoaJuridica cliente3 = new ClientePessoaJuridica();
-        ContaInvestimento conta3 = new ContaInvestimento(29148,462280,cliente3);
+        ClientePessoaJuridica cliente3 = new ClientePessoaJuridica("00000000001","Pedro","Rua da esperança");
+        ContaInvestimento conta3 = new ContaInvestimento(29148,492280,cliente3);
 
-        ClientePessoaJuridica cliente4 = new ClientePessoaJuridica();
-        ContaPoupanca conta4 = new ContaPoupanca(29148,462280,cliente4);
+        ClientePessoaJuridica cliente4 = new ClientePessoaJuridica("0000000333","Ana","Rua da esperança");
+        ContaPoupanca conta4 = new ContaPoupanca(29149,461280,cliente4);
+
+        //DEPOSITAR
+        aplicacao
+        .abrirConta(conta1)
+        .depositar(300);
 
         aplicacao
-        .abrirConta(conta1);
+        .abrirConta(conta2);
 
         aplicacao
-        .abrirConta(conta2)
-        .depositar(BigDecimal.valueOf(1000))
-        .sacar(BigDecimal.valueOf(200));
+        .abrirConta(conta3);
+
+        aplicacao
+        .abrirConta(conta4);
+
+        //OPERACOES PARA CONTAS JA CRIADAS (precisa do fazerLogin())
+        aplicacao.
+        realizarDeposito(conta2.fazerLogin(), 100);
+
+        aplicacao
+        .realizarDeposito(conta1.fazerLogin(), 100);
+        //TRANSFERÊNCIA
+        aplicacao
+        .realizarTransferencia(conta2.fazerLogin(), conta1.fazerLogin(), 200);
+        
+        aplicacao.realizarDeposito(conta4.fazerLogin(), 500);
+
         aplicacao.listarContas();
+
     }
-  
+
+    // public Conta realizarLogin(Conta conta){
+    //     return conta.fazerLogin();
+    // }
+
+    public Conta realizarSaque(Conta conta,double valor){
+        return conta.sacar(valor);
+    }
+    
+    public Conta realizarDeposito(Conta conta,double valor){
+        return conta.depositar(valor);
+    }
+
+    public Conta realizarTransferencia(Conta contaOrigem, Conta contaDestino, double valor){
+        return Conta.transferencia(contaOrigem, contaDestino, valor);
+    }
+
     public Conta abrirConta(Conta conta){
+        if(Conta.isContaExistente(conta)){
+            //TODO: Criar exceção
+            System.out.println("LANÇAR EXCEÇÃO: Não é possível criar uma nova conta. Código de Conta"+
+            "e código da agência já existente"
+            );
+        }
          return conta.abrirConta(conta);
     }
 
@@ -50,5 +96,6 @@ public class Aplicacao{
             System.out.println();
         }
         return Conta.contas;
-    }    
+    }
+    
 }
