@@ -43,4 +43,6 @@ public abstract class  Cliente {
 
     public abstract BigDecimal getTaxaConta();
 
+    public abstract BigDecimal getTaxaInvestimento();
+
 }

@@ -3,6 +3,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import src.exceptions.BankExceptions;
 import src.main.model.cliente.Cliente;
 
 
@@ -73,7 +74,13 @@ public abstract class Conta {
 
     public  abstract  Conta abrirConta(Conta tipoConta);
 
-    public  Conta sacar(double valor){
+    public  Conta sacar(double valor) throws BankExceptions{
+
+
+        if(this.getSaldo().compareTo(BigDecimal.valueOf(valor)) == -1 ){
+            throw new BankExceptions("1001");
+        }
+
         this.setSaldo(this.getSaldo().subtract(BigDecimal.valueOf(valor).multiply(this.getCliente().getTaxaConta())));
 
         this.setSaldo(this.getSaldo().subtract(BigDecimal.valueOf(valor)));
@@ -81,12 +88,40 @@ public abstract class Conta {
         return this;
     };
 
-    public Conta depositar(double valor){
+    // public abstract Conta investir(double valor, LocalDate dataInicio, LocalDate dataFim) throws BankExceptions;
+    // public Conta investir(double valor) throws BankExceptions{
+
+
+    //     if(this.getSaldo().compareTo(BigDecimal.valueOf(valor)) == -1 ){
+    //         throw new BankExceptions("1001");
+    //     }
+
+    //     this.setSaldo(this.getSaldo().subtract(BigDecimal.valueOf(valor).multiply(this.getCliente().getTaxaConta())));
+
+    //     this.setSaldo(this.getSaldo().subtract(BigDecimal.valueOf(valor)));
+    //     mergeConta();
+    //     return this;
+    // };
+
+    public Conta depositar(double valor) throws BankExceptions{
+
+        if(valor < 0 ){
+            throw new BankExceptions("1003");
+        }
+
         setSaldo(getSaldo().add(BigDecimal.valueOf(valor)));
         mergeConta();
         return this;
     }
     public static Conta transferencia(Conta contaOrigem, Conta contaDestino, double valor) {
+
+        if(valor < 0 ){
+            throw new BankExceptions("1003");
+        }
+
+        if(contaOrigem.getSaldo().compareTo(BigDecimal.valueOf(valor)) == -1 ){
+            throw new BankExceptions("1001");
+        }
 
         BigDecimal valorBig = BigDecimal.valueOf(valor);
         //Aplica taxa apenas se for PJ
@@ -107,7 +142,7 @@ public abstract class Conta {
 
     }
 
-    private Conta mergeConta(){
+    public Conta mergeConta(){
         for(Conta contaGravada:contas){
             if(contaGravada.getAgencia() == this.getAgencia() && contaGravada.getCodigoConta() == this.getCodigoConta()){
                 contas.set(contas.indexOf(contaGravada), this);
@@ -135,4 +170,23 @@ public abstract class Conta {
         System.out.println("LANCAR EXCEÇÃO! CONTA INEXISTENTE");
         return null;
     }
+
+
+    @Override
+    public String toString() {
+        String TipoConta = getClass().getSimpleName();
+        String TipoCliente = getCliente().getClass().getSimpleName();
+        String Nome = getCliente().nome;
+        BigDecimal Saldo = getSaldo();
+
+        return String.format("\n\n{\nTipoConta: %s,\nTipoCliente: %s,\nNome: %s,\nSaldo: %.2f\n}", TipoConta, TipoCliente, Nome, Saldo);
+    }
+
+    // System.out.println("TipoConta: "+conta.getClass().getSimpleName());
+            // System.out.println("TipoCliente: "+conta.getCliente().getClass().getSimpleName());
+            // System.out.println("nome: "+conta.getCliente().nome);
+            // System.out.println("saldo: "+conta.getSaldo());
+            // System.out.println();
+
+    
 }

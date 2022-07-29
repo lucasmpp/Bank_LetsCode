@@ -1,7 +1,9 @@
 package src.main;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import src.exceptions.BankExceptions;
 import src.main.model.cliente.ClientePessoaFisica;
 import src.main.model.cliente.ClientePessoaJuridica;
 import src.main.model.conta.Conta;
@@ -16,6 +18,7 @@ public class Aplicacao{
         
         ClientePessoaFisica cliente1 = new ClientePessoaFisica("12345678910","Jose","bairro desconhecido, casa desconhecida");
         ContaCorrente conta1 = new ContaCorrente(29548,462780,cliente1);
+        // ContaInvestimento conta1invest = new ContaInvestimento(29548,462780,cliente1);
 
         ClientePessoaFisica cliente2 = new ClientePessoaFisica("12345678","Maria","bairro conhecido, outra casa");
         ContaCorrente conta2 = new ContaCorrente(29148,462280,cliente2);
@@ -30,15 +33,22 @@ public class Aplicacao{
         aplicacao
         .abrirConta(conta1);
 
-        aplicacao
-        .abrirConta(conta2)
-        .depositar(100)
-        .sacar(30); //ESPERADO 70
+        // aplicacao
+        // .abrirConta(conta2)
+        // .depositar(100)
+        // .sacar(30); //ESPERADO 70
 
         aplicacao
-        .abrirConta(conta4)
+        .abrirConta(conta3)
         .depositar(100);
-        aplicacao.realizarTransferencia(conta4.fazerLogin(), conta1.fazerLogin(), 30); //ESPERADO 69.85 
+
+        aplicacao.realizarTransferencia(conta3.fazerLogin(), conta1.fazerLogin(), 30); //ESPERADO 69.85 
+
+        // aplicacao
+        // .abrirConta(conta3)
+        // .depositar(100);
+        
+        // aplicacao.investir((ContaInvestimento)conta3.fazerLogin(), 50, LocalDate.of(2020, 4, 10), LocalDate.of(2020, 4, 14));
 
         aplicacao.listarContas();
     }
@@ -46,6 +56,13 @@ public class Aplicacao{
     // public Conta realizarLogin(Conta conta){
     //     return conta.fazerLogin();
     // }
+
+    //TODO: Método consultar saldo
+
+    public Conta investir(ContaInvestimento conta,double valor, LocalDate dataInicio, LocalDate dataFim){
+        return conta.investir(valor, dataInicio, dataFim);
+        
+    }
 
     public Conta realizarSaque(Conta conta,double valor){
         return conta.sacar(valor);
@@ -59,12 +76,9 @@ public class Aplicacao{
         return Conta.transferencia(contaOrigem, contaDestino, valor);
     }
 
-    public Conta abrirConta(Conta conta){
+    public Conta abrirConta(Conta conta) throws BankExceptions{
         if(Conta.isContaExistente(conta)){
-            //TODO: Criar exceção
-            System.out.println("LANÇAR EXCEÇÃO: Não é possível criar uma nova conta. Código de Conta"+
-            "e código da agência já existente"
-            );
+            throw new BankExceptions("1004");
         }
          return conta.abrirConta(conta);
     }
@@ -76,11 +90,7 @@ public class Aplicacao{
 
     public List<Conta> listarContas(){
         for(Conta conta:Conta.contas){
-            System.out.println("TipoConta: "+conta.getClass().getSimpleName());
-            System.out.println("TipoCliente: "+conta.getCliente().getClass().getSimpleName());
-            System.out.println("nome: "+conta.getCliente().nome);
-            System.out.println("saldo: "+conta.getSaldo());
-            System.out.println();
+            System.out.println(conta);
         }
         return Conta.contas;
     }

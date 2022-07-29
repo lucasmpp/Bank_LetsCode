@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 public class ClientePessoaJuridica extends Cliente {
     String cnpj;
     private static final BigDecimal TAXA_SAQUE_TRANSFERENCIA = BigDecimal.valueOf(0.005);
+    private static final BigDecimal TAXA_INVESTIMENTO = ClientePessoaFisica.TAXA_INVESTIMENTO.add(BigDecimal.valueOf(0.02));
 
 
     public ClientePessoaJuridica(String cnpj,  String nome,String endereco){
@@ -16,6 +17,11 @@ public class ClientePessoaJuridica extends Cliente {
     public BigDecimal getTaxaConta() {
         
         return TAXA_SAQUE_TRANSFERENCIA;
+    }
+
+    @Override
+    public BigDecimal getTaxaInvestimento() {
+        return TAXA_INVESTIMENTO;
     }
    
 
