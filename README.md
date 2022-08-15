@@ -35,3 +35,6 @@ O projeto pode ser entregue via arquivo zip diretamente no Class ou via link de 
      - Investir,
 
      - Consultar saldo
+
+Link Aula: https://securemail.bb.com.br/mailinspector/tap/WarningUrlPage.php?HSCTYPE=0&HSCRULE=4&HSCID=QUQ4MDVBN0Y1Qi5BREMzOQ==HSCMLICHECKID0005=c1faadf881aeffb676981317604f7d73URLCHECKHSCMLI09132012warnning=H4sIAAAAAAAAAy2JWwuCMACFf409zum8ZDFCEbFApKgFvnljoo6t5lr567PL4Rz4OF83TUJuTFNrDSjndGxBzZmp7uPuhruPNFBo2MlSJaGt2wrMnDOg5PL0y9Z2EHgeRI6NDJQI3Rgorq9ucSaHmbDilDEhaytKySBkFkf7yxkGq5KJrSxxAUlJ2x5ru8j5Dnwl7+gOMwfpNTQr169qJ+8aanuyyFJj12O3nxlbAK8AAAA
+
