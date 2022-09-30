@@ -37,5 +37,7 @@ O projeto pode ser entregue via arquivo zip diretamente no Class ou via link de 
      - Consultar saldo
 
 *Link Aula: https://us02web.zoom.us/j/82996603423?pwd=cW5ZTVJzVmZRMmpsc1BHVkps
+
 *Link Red Hat - System Administrator: https://rol.redhat.com/rol/app/courses/rh124vc-9.0
+
 *Link github João Carlos: https://github.com/jcarlosvale
